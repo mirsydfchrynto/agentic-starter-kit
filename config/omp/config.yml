@@ -8,6 +8,14 @@ modelRoles:
   judge: gemini-2.5-flash
   vision: gemini-2.5-flash
   advisor: gemini-2.5-flash
+skills:
+  enabled: true
+  enablePiUser: true
+  enablePiProject: true
+  enableAgentsUser: true
+  enableAgentsProject: true
+  enableClaudeUser: true
+  enableClaudeProject: true
 secrets:
   enabled: true
 browser:

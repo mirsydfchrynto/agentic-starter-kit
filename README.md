@@ -95,11 +95,11 @@ Masuk ke direktori Obsidian Vault:
 cd ~/Documents/Academic-Vault
 omp
 ```
-Contoh prompt yang dapat langsung digunakan:
-- *"Bantu saya susun Bab 1 Pendahuluan berdasarkan latar belakang masalah antrean di rumah sakit."*
-- *"Audit Bab 3 Metodologi Penelitian di folder 10-Skripsi menggunakan mode skripsi-auditor."*
-- *"Cari literatur di arXiv tentang federated learning untuk klasifikasi citra medis."*
-
+Cukup ketik dengan bahasa alami sehari-hari tanpa perlu menghafal atau mengetikkan nama skill. Agen secara otomatis mengenali tugas Anda dan langsung mengaktifkan skill terkait:
+- *"Carikan 5 jurnal referensi tentang klasifikasi citra medis dan susun tabel State of the Art"* $\to$ Otomatis memicu `sinta-scholar-search` (filter minimal SINTA 2 / Scopus), `grounded-citations`, dan format telaah pustaka Bab 2.
+- *"Bantu saya susun draf Bab 1 Pendahuluan tentang sistem antrean rumah sakit"* $\to$ Otomatis memicu `proposal-skripsi`, `skripsi-auditor`, dan `humanizer` tanpa gaya bahasa klise AI.
+- *"Buat endpoint API login dan register di backend"* $\to$ Otomatis memicu `tdd` dan `ponytail` (kode ringkas, minim dependensi tambahan, teruji).
+- *"Kenapa fungsi di baris 42 menghasilkan nilai undefined?"* $\to$ Otomatis memicu `diagnosing-bugs` dan `safe-change`.
 ### 3. Membuka di Aplikasi Obsidian
 1. Buka aplikasi **Obsidian**.
 2. Klik tombol **Open folder as vault**.
