@@ -115,3 +115,20 @@ Jika Anda ingin mengganti API key di kemudian hari, buka file shell rc Anda (`~/
 export GEMINI_API_KEY="AIzaSy...KeyBaruAnda"
 ```
 Lalu jalankan `source ~/.bashrc` atau `source ~/.zshrc`.
+
+### Menggunakan Akun Google Antigravity (Gemini 3.8 / Gemini 4 / Claude Sonnet)
+Jika Anda memiliki akun yang memiliki akses kuota **Google Antigravity**, Anda dapat menghubungkannya langsung ke OMP melalui OAuth browser:
+```bash
+omp login google-antigravity
+```
+Jendela browser akan terbuka otomatis untuk otentikasi akun Google Anda. Setelah login berhasil, seluruh model berikut langsung aktif:
+- `google-antigravity/gemini-3.8-flash` (Vision + Fast Reasoning)
+- `google-antigravity/gemini-4-argon` (Deep Analytical Architecture)
+- `google-antigravity/claude-sonnet-5-5` (Coding & Heavy Analysis)
+- `google-antigravity/claude-opus-5-5` (Deep Research & Complex Tasks)
+
+Untuk menjalankan OMP langsung dengan model Antigravity:
+```bash
+omp --model google-antigravity/gemini-3.8-flash
+```
+Atau tekan `Ctrl+P` di dalam terminal OMP untuk mengganti model secara langsung.

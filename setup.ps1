@@ -114,6 +114,20 @@ if (-not $CurrentApiKey) {
     Write-Host "[SUCCESS] GEMINI_API_KEY terdeteksi aktif di sistem." -ForegroundColor Green
 }
 
+# 7. Opsi Login Google Antigravity (Gemini Pro, Claude Sonnet, dll)
+Write-Host ""
+Write-Host "--- LOGIN GOOGLE ANTIGRAVITY (OPSIONAL) ---" -ForegroundColor Cyan
+Write-Host "Jika Anda memiliki akun dengan kuota Google Antigravity, Anda dapat login sekarang." -ForegroundColor Cyan
+$LoginAntigravity = Read-Host "Apakah Anda ingin login ke Google Antigravity sekarang? (y/N)"
+if ($LoginAntigravity -match "^[Yy]$") {
+    try {
+        omp login google-antigravity
+        Write-Host "[SUCCESS] Login Google Antigravity selesai!" -ForegroundColor Green
+    } catch {
+        Write-Host "[WARN] Login belum selesai. Anda dapat menjalankannya nanti dengan perintah: 'omp login google-antigravity'" -ForegroundColor Yellow
+    }
+}
+
 # 7. Pemeriksaan Companion Tools
 Write-Host ""
 Write-Host "[INFO] Memeriksa companion tools..." -ForegroundColor Cyan

@@ -171,6 +171,17 @@ else
     log_success "GEMINI_API_KEY terdeteksi aktif di sistem."
 fi
 
+# 9. Opsi Login Google Antigravity (Gemini Pro, Claude Sonnet, dll)
+echo ""
+echo -e "${BOLD}--- LOGIN GOOGLE ANTIGRAVITY (OPSIONAL) ---${RESET}"
+echo "Jika Anda memiliki akun dengan kuota Google Antigravity (Gemini 3.8 Flash, Gemini 4 Argon, Claude Sonnet 5.5):"
+read -r -p "Apakah Anda ingin login ke Google Antigravity sekarang? (y/N): " login_ag_choice
+if [[ "${login_ag_choice}" =~ ^[Yy]$ ]]; then
+    if command -v omp &> /dev/null; then
+        omp login google-antigravity || log_warn "Login dapat dilakukan nanti dengan perintah: omp login google-antigravity"
+    fi
+fi
+
 echo ""
 echo -e "${BOLD}${GREEN}==========================================================${RESET}"
 echo -e "${BOLD}${GREEN}   ✅ SETUP SELESAI & SISTEM SIAP DIGUNAKAN!              ${RESET}"
