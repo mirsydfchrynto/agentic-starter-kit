@@ -1,0 +1,31 @@
+# Environment and secrets
+.env
+*.key
+*.pem
+
+# Database and SQLite artifacts
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# Agent session and temporary runtime data
+sessions/
+blobs/
+cache/
+logs/
+*.log
+*.bak
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Language runtime caches
+__pycache__/
+*.pyc
+node_modules/
+.venv/

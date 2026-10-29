@@ -1,0 +1,79 @@
+{
+  "nodes": [
+    {
+      "id": "node-1",
+      "x": -400,
+      "y": 0,
+      "width": 250,
+      "height": 140,
+      "type": "text",
+      "text": "## 1. Ide & Latar Belakang\n- Identifikasi Masalah Nyata\n- Rumusan Masalah Tajam\n- Batasan Penelitian"
+    },
+    {
+      "id": "node-2",
+      "x": -100,
+      "y": 0,
+      "width": 250,
+      "height": 140,
+      "type": "text",
+      "text": "## 2. Studi Pustaka\n- State of the Art (5+ Jurnal)\n- Landasan Teori Algoritma\n- Identifikasi Research Gap"
+    },
+    {
+      "id": "node-3",
+      "x": 200,
+      "y": 0,
+      "width": 250,
+      "height": 140,
+      "type": "text",
+      "text": "## 3. Metodologi & Desain\n- Arsitektur Perangkat Lunak\n- Formulasi Matematis\n- Rencana Pengujian Empiris"
+    },
+    {
+      "id": "node-4",
+      "x": 500,
+      "y": 0,
+      "width": 250,
+      "height": 140,
+      "type": "text",
+      "text": "## 4. Implementasi & Uji\n- Koding Berbasis TDD\n- Simulasi & Uji Lapangan\n- Ekstraksi Metrik Kinerja"
+    },
+    {
+      "id": "node-5",
+      "x": 800,
+      "y": 0,
+      "width": 250,
+      "height": 140,
+      "type": "text",
+      "text": "## 5. Kesimpulan & Naskah\n- Analisis Hasil & Komparasi\n- Jawaban Rumusan Masalah\n- Finalisasi Naskah Skripsi"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "fromNode": "node-1",
+      "fromSide": "right",
+      "toNode": "node-2",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-2",
+      "fromNode": "node-2",
+      "fromSide": "right",
+      "toNode": "node-3",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-3",
+      "fromNode": "node-3",
+      "fromSide": "right",
+      "toNode": "node-4",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-4",
+      "fromNode": "node-4",
+      "fromSide": "right",
+      "toNode": "node-5",
+      "toSide": "left"
+    }
+  ]
+}
