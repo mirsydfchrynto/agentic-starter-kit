@@ -8,7 +8,7 @@ Dirancang agar siap di-*clone* dan langsung berjalan dalam 1 perintah tanpa memb
 
 ## ⚡ Fitur Utama
 
-- **Zero-Config Google Gemini:** Menggunakan kuota API Google Gemini langsung (`gemini-2.5-pro` untuk reasoning & planning, `gemini-2.5-flash` untuk eksekusi cepat), tanpa memerlukan proxy lokal tambahan.
+- **Tier Terbaik Google Antigravity & Gemini:** Menggunakan konfigurasi model penalaran tertinggi: `google-antigravity/gemini-4-argon:high` untuk Task & Coding Sub-agents, dan `google-antigravity/gemini-3.8-flash:high` untuk Default/Plan/Vision/Judge, dengan fallback otomatis ke `gemini-2.5-pro` dan `gemini-2.5-flash`.
 - **Automated 1-Step Setup:** Skrip `setup.sh` otomatis memasang biner `omp`, menyinkronkan seluruh konfigurasi model, mendaftarkan puluhan skill, dan menyiapkan Obsidian Academic Vault.
 - **Obsidian Academic Vault Siap Pakai:** Struktur folder riset formal (`00-Inbox`, `10-Skripsi/Bab-1-5`, `20-Projects`, `30-Knowledge`, `40-Debug-TIL`, `50-Agent-Memory`) dilengkapi diagram visual `Skripsi-Workflow.canvas`.
 - **Aturan Kritis Anti-Slop & Anti-Yes-Man:** Mengintegrasikan protokol penulisan lugas tanpa basa-basi (*no AI slop*), evaluasi asumsi kritis sebelum menyetujui ide, dan prinsip minimalisme kode (*Ponytail Protocol*).

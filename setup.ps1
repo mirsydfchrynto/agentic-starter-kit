@@ -203,6 +203,10 @@ if %ERRORLEVEL% NEQ 0 (
 "@
     Set-Content -Path $DesktopBat -Value $DesktopContent -Force
     Write-Host "[SUCCESS] Shortcut Desktop dibuat: '$DesktopBat'" -ForegroundColor Green
+    # Shortcut Login Antigravity di Desktop
+    $DesktopLoginBat = Join-Path $DesktopDir "Login Antigravity.bat"
+    Copy-Item -Path (Join-Path $ScriptDir "login-antigravity.bat") -Destination $DesktopLoginBat -Force
+    Write-Host "[SUCCESS] Shortcut Login Antigravity dibuat di Desktop." -ForegroundColor Green
 }
 
 # 6. Pemeriksaan GEMINI_API_KEY di Windows Environment
@@ -226,24 +230,26 @@ if (-not $CurrentApiKey) {
     Write-Host "[SUCCESS] GEMINI_API_KEY terdeteksi aktif di sistem." -ForegroundColor Green
 }
 
-# 7. Opsi Login Google Antigravity (Gemini Pro, Claude Sonnet, dll)
+# 7. Aktivasi Google Antigravity (Gemini 4 Argon & Gemini 3.8 Flash)
 Write-Host ""
-Write-Host "--- LOGIN GOOGLE ANTIGRAVITY (OPSIONAL) ---" -ForegroundColor Cyan
-Write-Host "Jika Anda memiliki akun dengan kuota Google Antigravity, Anda dapat login sekarang." -ForegroundColor Cyan
-$LoginAntigravity = Read-Host "Apakah Anda ingin login ke Google Antigravity sekarang? (y/N)"
-if ($LoginAntigravity -match "^[Yy]$") {
+Write-Host "--- AKTIVASI GOOGLE ANTIGRAVITY (GEMINI 4 ARGON & 3.8 FLASH) ---" -ForegroundColor Cyan
+Write-Host "Konfigurasi sistem ini memetakan model terbaik persis seperti setup Anda:" -ForegroundColor Cyan
+Write-Host "  - Task / Coding Sub-agents : google-antigravity/gemini-4-argon:high" -ForegroundColor Green
+Write-Host "  - Default / Plan / Vision  : google-antigravity/gemini-3.8-flash:high" -ForegroundColor Green
+Write-Host ""
+$LoginAntigravity = Read-Host "Apakah Anda ingin login ke Google Antigravity sekarang? (Y/n)"
+if ($LoginAntigravity -notmatch "^[Nn]$") {
     try {
         if ($FoundOmpPath) {
             & "$FoundOmpPath" login google-antigravity
         } else {
             omp login google-antigravity
         }
-        Write-Host "[SUCCESS] Login Google Antigravity selesai!" -ForegroundColor Green
+        Write-Host "[SUCCESS] Login Google Antigravity selesai! Gemini 4 Argon & 3.8 Flash siap digunakan!" -ForegroundColor Green
     } catch {
-        Write-Host "[WARN] Login belum selesai. Anda dapat menjalankannya nanti dengan: 'omp login google-antigravity'" -ForegroundColor Yellow
+        Write-Host "[WARN] Login belum selesai. Anda dapat login kapan saja via 'Login Antigravity.bat' di Desktop." -ForegroundColor Yellow
     }
 }
-
 # 8. Pemeriksaan Companion Tools
 Write-Host ""
 Write-Host "[INFO] Memeriksa companion tools..." -ForegroundColor Cyan
