@@ -36,8 +36,10 @@ Buka **PowerShell** (Run as Administrator tidak wajib), lalu jalankan:
 git clone https://github.com/mirsydfchrynto/agentic-starter-kit.git
 cd agentic-starter-kit
 
-# 2. Jalankan instalasi native Windows
-.\setup.ps1
+# 2. Jalankan instalasi native Windows (pilih salah satu)
+powershell -ExecutionPolicy Bypass -File .\setup.ps1
+# ATAU:
+.\setup.bat
 ```
 
 ### Untuk Pengguna Linux / macOS / WSL2
