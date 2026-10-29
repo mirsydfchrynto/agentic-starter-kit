@@ -13,26 +13,37 @@ Dirancang agar siap di-*clone* dan langsung berjalan dalam 1 perintah tanpa memb
 - **Obsidian Academic Vault Siap Pakai:** Struktur folder riset formal (`00-Inbox`, `10-Skripsi/Bab-1-5`, `20-Projects`, `30-Knowledge`, `40-Debug-TIL`, `50-Agent-Memory`) dilengkapi diagram visual `Skripsi-Workflow.canvas`.
 - **Aturan Kritis Anti-Slop & Anti-Yes-Man:** Mengintegrasikan protokol penulisan lugas tanpa basa-basi (*no AI slop*), evaluasi asumsi kritis sebelum menyetujui ide, dan prinsip minimalisme kode (*Ponytail Protocol*).
 - **Curated Skills Suite:**
-  - **Akademik & Skripsi:** `proposal-skripsi`, `skripsi-auditor`, `arxiv`, `grounded-citations`, `docx`, `pdf`, `powerpoint`, `humanizer`, `no-ai-slop`, `json-canvas`, `obsidian-markdown`.
+  - **Akademik & Skripsi:** `proposal-skripsi`, `skripsi-auditor`, `sinta-scholar-search` (SINTA 1 & 2 / Garuda), `arxiv`, `grounded-citations`, `docx`, `pdf`, `powerpoint`, `humanizer`, `no-ai-slop`, `json-canvas`, `obsidian-markdown`.
   - **Rekayasa Perangkat Lunak:** `tdd`, `diagnosing-bugs`, `domain-modeling`, `code-review`, `code-simplifier`, `safe-change`, `security-audit`, `ui-ux-pro-max`, `github`, `ponytail-review`.
 
 ---
 
 ## 📋 Prasyarat Sistem
 
-1. Sistem Operasi: Linux (Ubuntu, Debian, Arch, Fedora), macOS, atau Windows WSL2.
-2. Shell: Bash atau Zsh.
-3. Alat Dasar: `git`, `curl`.
+1. Sistem Operasi: Windows 10/11 (PowerShell), Linux (Ubuntu, Debian, Arch, Fedora), macOS, atau Windows WSL2.
+2. Shell: PowerShell (Windows) atau Bash/Zsh (Linux/macOS).
+3. Alat Dasar: `git` (sudah terpasang).
 4. Akun Google Gemini: [Google AI Studio API Key](https://aistudio.google.com/app/apikey).
 
 ---
 
 ## 🚀 Panduan Instalasi Cepat
 
-Jalankan perintah berikut di terminal:
+### Untuk Pengguna Windows (PowerShell)
+Buka **PowerShell** (Run as Administrator tidak wajib), lalu jalankan:
+```powershell
+# 1. Clone repository
+git clone https://github.com/mirsydfchrynto/agentic-starter-kit.git
+cd agentic-starter-kit
 
+# 2. Jalankan instalasi native Windows
+.\setup.ps1
+```
+
+### Untuk Pengguna Linux / macOS / WSL2
+Buka terminal **Bash / Zsh**, lalu jalankan:
 ```bash
-# 1. Clone repository ini
+# 1. Clone repository
 git clone https://github.com/mirsydfchrynto/agentic-starter-kit.git
 cd agentic-starter-kit
 
@@ -41,7 +52,7 @@ chmod +x setup.sh
 ./setup.sh
 ```
 
-Skrip akan menanyakan `GEMINI_API_KEY` jika belum disetel di shell Anda. Masukkan API key Anda saat diminta.
+Skrip akan meminta `GEMINI_API_KEY` jika belum disetel di sistem Anda. Masukkan API key Anda saat diminta.
 
 ---
 
@@ -59,7 +70,8 @@ agentic-starter-kit/
 │   └── engineering/          # Skill TDD, debugging, code review, UI/UX
 ├── vault-template/           # Template Obsidian Academic Vault lengkap
 ├── env.example               # Contoh konfigurasi environment variable
-├── setup.sh                  # Skrip instalasi otomatis portabel
+├── setup.sh                  # Skrip instalasi otomatis untuk Linux/macOS
+├── setup.ps1                 # Skrip instalasi native Windows (PowerShell)
 └── README.md
 ```
 

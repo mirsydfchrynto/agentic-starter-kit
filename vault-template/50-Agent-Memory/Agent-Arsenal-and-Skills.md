@@ -29,6 +29,7 @@ Dokumen ini memetakan seluruh kapabilitas dan alat eksekusi yang aktif pada sist
 | **`proposal-skripsi`** | Diskusi judul, Bab 1 - 3, perumusan masalah | Panduan terstruktur menyusun draf proposal skripsi |
 | **`skripsi-auditor`** | Review naskah, audit metodologi, verifikasi rumus | Peer-reviewer kritis penguji logika ilmiah dan data empiris |
 | **`arxiv`** | Pencarian makalah ilmiah, preprint, query paper ID | Ekstraksi dan perbandingan literatur akademik global |
+| **`sinta-scholar-search`** | Pencarian jurnal nasional SINTA 1 & 2, Garuda, Scholar | Protokol pencarian literatur terakreditasi dan validasi ISSN |
 | **`grounded-citations`** | Klaim ilmiah, pencantuman bukti, daftar rujukan | Menjamin seluruh kutipan berdasar sumber nyata tanpa halusinasi |
 | **`docx` & `pdf`** | Membaca, mengedit, atau konversi berkas tugas akhir | Manipulasi dokumen formal Word dan PDF |
 | **`humanizer` & `no-ai-slop`** | Polish kalimat naskah, review gaya bahasa | Menghapus pola kalimat generik AI agar tulisan alami dan tajam |
