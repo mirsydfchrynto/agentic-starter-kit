@@ -33,7 +33,7 @@ Jalankan perintah berikut di terminal:
 
 ```bash
 # 1. Clone repository ini
-git clone https://github.com/USERNAME/agentic-starter-kit.git
+git clone https://github.com/mirsydfchrynto/agentic-starter-kit.git
 cd agentic-starter-kit
 
 # 2. Jalankan instalasi otomatis
