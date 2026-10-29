@@ -2,6 +2,7 @@
 ==============================================================================
 Agentic Workspace & Academic Starter Kit Setup Script for Windows
 Stack: OMP (Oh-My-Pi) + Google Gemini + Obsidian + Curated Agent Skills
+Fitur Khusus: Auto-PATH Injection (3-Level), Desktop Shortcut, Standalone Launcher
 ==============================================================================
 #>
 
@@ -47,9 +48,71 @@ if (Get-Command omp -ErrorAction SilentlyContinue) {
             npm install -g @oh-my-pi/pi-coding-agent
             Write-Host "[SUCCESS] OMP berhasil dipasang via npm." -ForegroundColor Green
         } else {
-            Write-Host "[ERROR] Tidak dapat memasang OMP secara otomatis. Silakan pasang Node.js/npm dari https://nodejs.org/" -ForegroundColor Red
+            Write-Host "[ERROR] Tidak dapat memasang OMP secara otomatis. Silakan pasang Node.js dari https://nodejs.org/" -ForegroundColor Red
         }
     }
+}
+
+# 2.1 Deteksi Lokasi Biner OMP & Perbaikan PATH Otomatis (3-Level Auto-Fix)
+Write-Host "[INFO] Memindai lokasi instalasi biner OMP..." -ForegroundColor Cyan
+$PossibleDirs = @(
+    (Join-Path $env:LOCALAPPDATA "omp"),
+    (Join-Path $UserHome ".local\bin"),
+    (Join-Path $env:APPDATA "npm")
+)
+
+$FoundOmpPath = ""
+$FoundOmpDir = ""
+foreach ($dir in $PossibleDirs) {
+    $exeCheck = Join-Path $dir "omp.exe"
+    $cmdCheck = Join-Path $dir "omp.cmd"
+    if (Test-Path $exeCheck) {
+        $FoundOmpPath = $exeCheck
+        $FoundOmpDir = $dir
+        break
+    } elseif (Test-Path $cmdCheck) {
+        $FoundOmpPath = $cmdCheck
+        $FoundOmpDir = $dir
+        break
+    }
+}
+
+if (-not $FoundOmpPath -and (Get-Command omp -ErrorAction SilentlyContinue)) {
+    $FoundOmpPath = (Get-Command omp).Source
+    $FoundOmpDir = Split-Path -Parent $FoundOmpPath
+}
+
+if ($FoundOmpDir) {
+    Write-Host "[SUCCESS] Biner OMP terverifikasi di: $FoundOmpPath" -ForegroundColor Green
+    
+    # Level 1: Injeksi ke sesi PowerShell saat ini
+    if ($env:PATH -notlike "*$FoundOmpDir*") {
+        $env:PATH = "$FoundOmpDir;$env:PATH"
+    }
+    
+    # Level 2: Injeksi permanen ke User Environment Variables Windows (Registry)
+    $UserPath = [Environment]::GetEnvironmentVariable("Path", "User")
+    if ($UserPath -notlike "*$FoundOmpDir*") {
+        [Environment]::SetEnvironmentVariable("Path", "$FoundOmpDir;$UserPath", "User")
+        Write-Host "[SUCCESS] Berhasil mendaftarkan $FoundOmpDir ke User PATH Registry Windows." -ForegroundColor Green
+    }
+    
+    # Level 3: Injeksi ke PowerShell Profile agar terminal baru otomatis mengenali perintah 'omp'
+    try {
+        $ProfileDir = Split-Path -Parent $PROFILE
+        if (-not (Test-Path $ProfileDir)) {
+            New-Item -ItemType Directory -Path $ProfileDir -Force | Out-Null
+        }
+        $ProfileSnippet = "`$env:PATH = `"$FoundOmpDir;`$env:PATH`""
+        if (-not (Test-Path $PROFILE) -or (Get-Content $PROFILE -Raw -ErrorAction SilentlyContinue) -notlike "*$FoundOmpDir*") {
+            Add-Content -Path $PROFILE -Value "`n# OMP Auto-PATH Injected by Starter Kit`n$ProfileSnippet" -Force
+            Write-Host "[SUCCESS] Injeksi PATH berhasil ditambahkan ke PowerShell Profile: $PROFILE" -ForegroundColor Green
+        }
+    } catch {
+        # Abaikan jika ada pembatasan profile
+    }
+} else {
+    Write-Host "[WARN] Lokasi direktori OMP belum terdeteksi. Launcher batch otomatis akan digunakan." -ForegroundColor Yellow
 }
 
 # 3. Sinkronisasi konfigurasi OMP & model Gemini
@@ -93,6 +156,55 @@ if (Test-Path $TargetVault) {
     Write-Host "[SUCCESS] Vault Obsidian berhasil dipasang di $TargetVault." -ForegroundColor Green
 }
 
+# 5.1 Buat Launcher Batch Mandiri di Vault & Desktop (Solusi Anti-PATH Masalah)
+Write-Host "[INFO] Menyiapkan launcher mandiri anti-masalah PATH..." -ForegroundColor Cyan
+$VaultBat = Join-Path $TargetVault "start-omp.bat"
+$VaultCmd = Join-Path $TargetVault "omp.cmd"
+
+$OmpExecTarget = if ($FoundOmpPath) { "`"$FoundOmpPath`"" } else { "omp" }
+$LauncherContent = @"
+@echo off
+title Academic AI Agent (OMP)
+set "PATH=$FoundOmpDir;%LOCALAPPDATA%\omp;%USERPROFILE%\.local\bin;%APPDATA%\npm;%PATH%"
+cd /d "%~dp0"
+if exist "$FoundOmpPath" (
+    "$FoundOmpPath" %*
+) else (
+    omp %*
+)
+if %ERRORLEVEL% NEQ 0 (
+    echo.
+    echo Terjadi kendala saat meluncurkan OMP.
+    pause
+)
+"@
+Set-Content -Path $VaultBat -Value $LauncherContent -Force
+Set-Content -Path $VaultCmd -Value $LauncherContent -Force
+
+# Buat Desktop Shortcut langsung
+$DesktopDir = [Environment]::GetFolderPath("Desktop")
+if (Test-Path $DesktopDir) {
+    $DesktopBat = Join-Path $DesktopDir "Buka Agent Skripsi.bat"
+    $DesktopContent = @"
+@echo off
+title Academic AI Agent (OMP)
+set "PATH=$FoundOmpDir;%LOCALAPPDATA%\omp;%USERPROFILE%\.local\bin;%APPDATA%\npm;%PATH%"
+cd /d "$TargetVault"
+if exist "$FoundOmpPath" (
+    "$FoundOmpPath"
+) else (
+    omp
+)
+if %ERRORLEVEL% NEQ 0 (
+    echo.
+    echo Terjadi kendala saat meluncurkan OMP.
+    pause
+)
+"@
+    Set-Content -Path $DesktopBat -Value $DesktopContent -Force
+    Write-Host "[SUCCESS] Shortcut Desktop dibuat: '$DesktopBat'" -ForegroundColor Green
+}
+
 # 6. Pemeriksaan GEMINI_API_KEY di Windows Environment
 Write-Host ""
 Write-Host "--- PEMERIKSAAN KREDENSIAL API ---" -ForegroundColor Cyan
@@ -121,14 +233,18 @@ Write-Host "Jika Anda memiliki akun dengan kuota Google Antigravity, Anda dapat 
 $LoginAntigravity = Read-Host "Apakah Anda ingin login ke Google Antigravity sekarang? (y/N)"
 if ($LoginAntigravity -match "^[Yy]$") {
     try {
-        omp login google-antigravity
+        if ($FoundOmpPath) {
+            & "$FoundOmpPath" login google-antigravity
+        } else {
+            omp login google-antigravity
+        }
         Write-Host "[SUCCESS] Login Google Antigravity selesai!" -ForegroundColor Green
     } catch {
-        Write-Host "[WARN] Login belum selesai. Anda dapat menjalankannya nanti dengan perintah: 'omp login google-antigravity'" -ForegroundColor Yellow
+        Write-Host "[WARN] Login belum selesai. Anda dapat menjalankannya nanti dengan: 'omp login google-antigravity'" -ForegroundColor Yellow
     }
 }
 
-# 7. Pemeriksaan Companion Tools
+# 8. Pemeriksaan Companion Tools
 Write-Host ""
 Write-Host "[INFO] Memeriksa companion tools..." -ForegroundColor Cyan
 if (Get-Command git -ErrorAction SilentlyContinue) {
@@ -137,28 +253,19 @@ if (Get-Command git -ErrorAction SilentlyContinue) {
     Write-Host "[WARN] Git belum terpasang. Unduh dari: https://git-scm.com/download/win" -ForegroundColor Yellow
 }
 
-if (Get-Command typst -ErrorAction SilentlyContinue) {
-    Write-Host "[SUCCESS] Typst terdeteksi." -ForegroundColor Green
-} else {
-    Write-Host "[INFO] Typst opsional. Pasang via winget: 'winget install Typst.Typst'" -ForegroundColor Cyan
-}
-
-if (Get-Command pandoc -ErrorAction SilentlyContinue) {
-    Write-Host "[SUCCESS] Pandoc terdeteksi." -ForegroundColor Green
-} else {
-    Write-Host "[INFO] Pandoc opsional. Pasang via winget: 'winget install JohnMacFarlane.Pandoc'" -ForegroundColor Cyan
-}
-
 Write-Host ""
 Write-Host "==========================================================" -ForegroundColor Green
 Write-Host "   ✅ SETUP WINDOWS SELESAI & SISTEM SIAP DIGUNAKAN!      " -ForegroundColor Green
 Write-Host "==========================================================" -ForegroundColor Green
 Write-Host ""
-Write-Host "Cara Menggunakan di Windows:"
-Write-Host "1. Buka PowerShell di folder tugas akhir / vault Anda:"
+Write-Host "Cara Menggunakan (Pilih Yang Paling Mudah):"
+Write-Host "1. CARA 1 (KLIK DESKTOP - TERIMA BERES):" -ForegroundColor Yellow
+Write-Host "   Klik 2x file di Desktop Anda: 'Buka Agent Skripsi.bat'" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "2. CARA 2 (DARI TERMINAL POWERSHELL):" -ForegroundColor Yellow
 Write-Host "   cd $TargetVault" -ForegroundColor Cyan
-Write-Host "2. Jalankan OMP:"
 Write-Host "   omp" -ForegroundColor Cyan
+Write-Host ""
 Write-Host "3. Buka aplikasi Obsidian -> Pilih 'Open folder as vault' -> Arahkan ke:"
 Write-Host "   $TargetVault" -ForegroundColor Cyan
 Write-Host ""
