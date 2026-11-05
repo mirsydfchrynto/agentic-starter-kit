@@ -54,7 +54,7 @@ chmod +x setup.sh
 ./setup.sh
 ```
 
-Skrip akan meminta `GEMINI_API_KEY` jika belum disetel di sistem Anda. Masukkan API key Anda saat diminta.
+Skrip akan memandu otentikasi resmi Google Antigravity melalui browser secara otomatis.
 
 ---
 
