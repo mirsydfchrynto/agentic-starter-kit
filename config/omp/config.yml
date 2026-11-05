@@ -1,30 +1,19 @@
 setupVersion: 2
 modelRoles:
-  default: google-antigravity/gemini-3.8-flash:high
-  task: google-antigravity/gemini-4-argon:high
-  plan: google-antigravity/gemini-3.8-flash:high
-  slow: google-antigravity/gemini-3.8-flash:high
+  plan: google-antigravity/gemini-4-argon:high
   vision: google-antigravity/gemini-3.8-flash:high
+  slow: google-antigravity/gemini-3.8-flash:high
+  smol: 9router/bansos/ovh/gpt-oss-120b:high
+  task: google-antigravity/gemini-4-argon:high
   judge: google-antigravity/gemini-3.8-flash:high
+  web: google-antigravity/gemini-3.8-flash:high
+  default: google-antigravity/gemini-3.8-flash:high
   advisor: google-antigravity/gemini-3.8-flash:high
-  smol: google-antigravity/gemini-2.5-flash-lite:high
-skills:
-  enabled: true
-  enablePiUser: true
-  enablePiProject: true
-  enableAgentsUser: true
-  enableAgentsProject: true
-  enableClaudeUser: true
-  enableClaudeProject: true
 secrets:
   enabled: true
 browser:
   headless: true
 retry:
-  modelFallback: true
   fallbackChains:
-    google-antigravity/gemini-4-argon:high:
-      - google-antigravity/gemini-3.8-flash:high
-      - gemini-2.5-pro
-    google-antigravity/gemini-3.8-flash:high:
-      - gemini-2.5-flash
+    google-antigravity/claude-opus-5-5:
+      - google-antigravity/claude-opus-5-5

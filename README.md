@@ -23,7 +23,7 @@ Dirancang agar siap di-*clone* dan langsung berjalan dalam 1 perintah tanpa memb
 1. Sistem Operasi: Windows 10/11 (PowerShell), Linux (Ubuntu, Debian, Arch, Fedora), macOS, atau Windows WSL2.
 2. Shell: PowerShell (Windows) atau Bash/Zsh (Linux/macOS).
 3. Alat Dasar: `git` (sudah terpasang).
-4. Akun Google Gemini: [Google AI Studio API Key](https://aistudio.google.com/app/apikey).
+4. Akun Google Antigravity & 9Router (Tanpa memerlukan Google AI Studio API Key).
 
 ---
 
@@ -110,14 +110,12 @@ Cukup ketik dengan bahasa alami sehari-hari tanpa perlu menghafal atau mengetikk
 
 ---
 
-## ⚙️ Penyesuaian Model & Kredensial
-
-Jika Anda ingin mengganti API key di kemudian hari, buka file shell rc Anda (`~/.bashrc` atau `~/.zshrc`) dan perbarui:
+### Menggunakan Google Antigravity & Model Gratis 9Router
+Setup ini dirancang khusus menggunakan autentikasi resmi **Google Antigravity** dan model-model gratis (seperti *Zen*, *Bansos*), tanpa memerlukan AI Studio API Key.
+Cukup jalankan perintah berikut untuk login:
 ```bash
-export GEMINI_API_KEY="AIzaSy...KeyBaruAnda"
+omp login google-antigravity
 ```
-Lalu jalankan `source ~/.bashrc` atau `source ~/.zshrc`.
-
 ### Menggunakan Akun Google Antigravity (Gemini 3.8 / Gemini 4 / Claude Sonnet)
 Jika Anda memiliki akun yang memiliki akses kuota **Google Antigravity**, Anda dapat menghubungkannya langsung ke OMP melalui OAuth browser:
 ```bash

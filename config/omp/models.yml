@@ -1,19 +1,80 @@
 providers:
-  google:
-    apiKey: GEMINI_API_KEY
+  9router:
+    baseUrl: http://localhost:20128/v1
+    apiKey: NINEROUTER_KEY
+    api: openai-completions
+    authHeader: true
+    disableStrictTools: true
     models:
-      - id: gemini-2.5-pro
-        name: Google Gemini 2.5 Pro (Deep Reasoning & Architecture)
+      - id: best
+        name: Best Multi-Tier Fallback (Vision + Reasoning)
+        input: ["text", "image"]
+        contextWindow: 131072
+        maxTokens: 32768
+      - id: zen-fast
+        name: Zen Fast (Vision + Fast)
+        input: ["text", "image"]
+        contextWindow: 131072
+        maxTokens: 32768
+      - id: all-star
+        name: All Star (Vision + Reasoning)
+        input: ["text", "image"]
+        contextWindow: 131072
+        maxTokens: 32768
+      - id: fast-gemini
+        name: Fast Gemini Vision
         input: ["text", "image"]
         contextWindow: 1048576
-        maxTokens: 65536
-      - id: gemini-2.5-flash
-        name: Google Gemini 2.5 Flash (Fast Workhorse)
+        maxTokens: 32768
+      - id: gsb/gemini-flash
+        name: Gemini Flash Vision
         input: ["text", "image"]
         contextWindow: 1048576
-        maxTokens: 65536
-      - id: gemini-2.5-flash-lite
-        name: Google Gemini 2.5 Flash Lite (Lightweight & Quick)
+        maxTokens: 32768
+      - id: zen/big-pickle
+        name: Zen Big Pickle (Workhorse $0)
         input: ["text", "image"]
-        contextWindow: 1048576
-        maxTokens: 65536
+        contextWindow: 131072
+        maxTokens: 32768
+      - id: bansos/cohere/north-mini-code:free
+        name: Cohere North Mini Code (Smol $0)
+        input: ["text"]
+        contextWindow: 32768
+        maxTokens: 8192
+      - id: bansos/ovh/gpt-oss-120b
+        name: OVH GPT-OSS 120B (Slow $0)
+        input: ["text"]
+        contextWindow: 131072
+        maxTokens: 32768
+      - id: bansos/nvidia/nemotron-3-ultra-550b-a55b:free
+        name: Nemotron 3 Ultra 550B (Plan Reasoning $0)
+        input: ["text"]
+        contextWindow: 131072
+        maxTokens: 32768
+      - id: zen/nemotron-3.5-super-vl-free
+        name: Nemotron 3.5 Super VL (Vision $0)
+        input: ["text", "image"]
+        contextWindow: 131072
+        maxTokens: 32768
+  9router-go:
+    baseUrl: http://localhost:20130/v1
+    apiKey: NINEROUTER_KEY
+    api: openai-completions
+    authHeader: true
+    disableStrictTools: true
+    models:
+      - id: best
+        name: Best Go (Vision + Reasoning)
+        input: ["text", "image"]
+        contextWindow: 131072
+        maxTokens: 32768
+      - id: zen-fast
+        name: Zen Fast Go (Vision + Fast)
+        input: ["text", "image"]
+        contextWindow: 131072
+        maxTokens: 32768
+      - id: all-star
+        name: All Star Go (Vision + Reasoning)
+        input: ["text", "image"]
+        contextWindow: 131072
+        maxTokens: 32768

@@ -209,26 +209,7 @@ if %ERRORLEVEL% NEQ 0 (
     Write-Host "[SUCCESS] Shortcut Login Antigravity dibuat di Desktop." -ForegroundColor Green
 }
 
-# 6. Pemeriksaan GEMINI_API_KEY di Windows Environment
-Write-Host ""
-Write-Host "--- PEMERIKSAAN KREDENSIAL API ---" -ForegroundColor Cyan
-$CurrentApiKey = [Environment]::GetEnvironmentVariable("GEMINI_API_KEY", "User")
-if (-not $CurrentApiKey) {
-    $CurrentApiKey = $env:GEMINI_API_KEY
-}
-
-if (-not $CurrentApiKey) {
-    Write-Host "[WARN] GEMINI_API_KEY belum terpasang di sistem Windows!" -ForegroundColor Yellow
-    Write-Host "Dapatkan API Key dari https://aistudio.google.com/app/apikey" -ForegroundColor Yellow
-    $UserKey = Read-Host "Masukkan Google Gemini API Key Anda sekarang (atau tekan Enter untuk lewat)"
-    if ($UserKey -and $UserKey.Trim() -ne "") {
-        [Environment]::SetEnvironmentVariable("GEMINI_API_KEY", $UserKey.Trim(), "User")
-        $env:GEMINI_API_KEY = $UserKey.Trim()
-        Write-Host "[SUCCESS] GEMINI_API_KEY berhasil disimpan permanen ke User Environment Variables Windows." -ForegroundColor Green
-    }
-} else {
-    Write-Host "[SUCCESS] GEMINI_API_KEY terdeteksi aktif di sistem." -ForegroundColor Green
-}
+# (GEMINI_API_KEY tidak diperlukan - menggunakan Google Antigravity & Model Gratis China / 9Router)
 
 # 7. Aktivasi Google Antigravity (Gemini 4 Argon & Gemini 3.8 Flash)
 Write-Host ""
