@@ -1,0 +1,40 @@
+{
+  "skill_name": "proposal-skripsi",
+  "version": "2.0.0",
+  "evals": [
+    {
+      "id": "ttg-end-to-end",
+      "prompt": "Bantu saya merancang dan menyusun proposal skripsi skema Teknologi Tepat Guna (TTG) tentang sistem pemantauan kelembapan tanah dan penyiraman otomatis untuk kelompok tani lokal, lengkap dengan format DOCX A4 4-4-3-3, spasi 1.5, sitasi IEEE dari file .bib terverifikasi, dan file bersih Turnitin tanpa lampiran.",
+      "expected_output": "Dokumen proposal Bab I-III termasuk Subbab 1.6 Profil Mitra dan 3.5 Rencana Penerapan & Serah Terima, panjang Bab I-III 15-25 halaman, daftar pustaka 1:1 terverifikasi Crossref/OJS, nol artefak markdown, dan dua file PDF terpisah (siap upload + versi bersih Turnitin).",
+      "files": [],
+      "assertions": [
+        "Memeriksa kelengkapan data primer mitra sebelum menulis Bab I.1 piramida terbalik",
+        "Memastikan Rumusan Masalah, Tujuan (kata kerja operasional), dan Indikator Pengujian 3.4 selaras 1:1",
+        "Menyertakan Subbab 1.6 Profil Mitra, 3.5 Rencana Penerapan & Serah Terima, serta Lampiran Surat Kesediaan Mitra",
+        "Memvalidasi referensi memakai scripts/verify_bib_crossref_ojs.py dan format DOCX memakai scripts/audit_proposal_style.py"
+      ]
+    },
+    {
+      "id": "artikel-ilmiah-scheme",
+      "prompt": "Saya memilih skema Artikel Ilmiah dengan target publikasi jurnal SINTA 2. Susunkan struktur proposal UTS dan jelaskan bagian mana yang tidak perlu ditulis ulang di Bab pendamping.",
+      "expected_output": "Struktur 2 bab pendamping (Bab I Pendahuluan <= 2 halaman + Kontribusi Penelitian, Bab II Rencana Publikasi memuat jurnal tujuan SINTA 3+ serta jurnal cadangan) dan Lampiran draf artikel siap submit plus supplementary files.",
+      "files": [],
+      "assertions": [
+        "Menggunakan struktur 2 bab pendamping sesuai pedoman skema Artikel Ilmiah, bukan memaksakan 3 bab penuh produk",
+        "Menyertakan daftar jurnal tujuan minimal SINTA 3, analisis kesesuaian fokus/templat, dan rencana jurnal cadangan",
+        "Memetakan lampiran wajib draf artikel siap submit dan supplementary files"
+      ]
+    },
+    {
+      "id": "pre-submit-audit-deslop",
+      "prompt": "Audit file proposal.docx dan daftar-pustaka.bib sebelum dikumpulkan ke Edlink. Pastikan tidak ada pola bahasa AI, sitasi yang tidak sinkron, atau margin/spasi yang salah.",
+      "expected_output": "Hasil eksekusi skrip verify_bib_crossref_ojs.py dan audit_proposal_style.py dengan daftar temuan konkret (spasi, margin, sitasi hilang/lompat, backtick/asterisk sisa, NIK bocor, dan AI tells Bahasa Indonesia) beserta perbaikan bertarget.",
+      "files": [],
+      "assertions": [
+        "Menjalankan verify_bib_crossref_ojs.py untuk memastikan 100% referensi cocok 1:1 dan urutan [1..N] naik",
+        "Menjalankan audit_proposal_style.py untuk memeriksa spasi 1.50, margin A4, nol leftover markdown, dan pola humanizer-indonesia",
+        "Tidak mengubah data empiris atau mengarang angka/referensi saat memperbaiki temuan"
+      ]
+    }
+  ]
+}
