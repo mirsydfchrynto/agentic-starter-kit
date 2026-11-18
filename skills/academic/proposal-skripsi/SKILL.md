@@ -10,14 +10,14 @@ description: >
   membersihkan pola AI-slop Bahasa Indonesia, membangun DOCX/PDF rapi berspasi 1.50 tepat,
   atau menyiapkan paket upload UTS dan versi bersih Turnitin tanpa lampiran mentah.
 metadata:
-  title: Arsitek & Auditor Proposal Skripsi Terapan (5 Fase)
-  version: "2.0.0"
+  title: Arsitek & Auditor Proposal Skripsi Terapan (6 Fase)
+  version: "2.1.0"
   author: mirsydfchrynto
 ---
 
-# Proposal Skripsi v2.0.0 — Pipeline 5 Fase Terintegrasi
+# Proposal Skripsi v2.1.0 — Pipeline 6 Fase Terintegrasi
 
-Gunakan skill ini sebagai orkestrator utama dari nol hingga naskah final siap kumpul (DOCX + PDF + paket bersih Turnitin). Setiap langkah memprioritaskan akurasi data primer, verifikasi pustaka langsung (*zero hallucinated citations*), tata bahasa Indonesia akademis alami, dan ketepatan tata letak OOXML.
+Gunakan skill ini sebagai orkestrator utama dari nol hingga naskah final siap kumpul (DOCX + PDF + paket bersih Turnitin + audit koreksi POV dosen). Setiap langkah memprioritaskan akurasi data primer, verifikasi pustaka langsung (*zero hallucinated citations*), tata bahasa Indonesia akademis alami, ketepatan tata letak OOXML, serta uji ketahanan metodologi dari sudut pandang dosen penguji.
 
 ---
 
@@ -95,10 +95,20 @@ Jalankan audit otomatis dan inspeksi visual sebelum menyerahkan berkas ke mahasi
      scripts/audit_proposal_style.py path/to/proposal.docx --perplexity
    ```
 2. **Inspeksi Visual Halaman Kunci (`pdftoppm -png -r 140`)**: Render halaman Cover, Pengesahan, Daftar Isi, tabel panjang yang melewati batas halaman (`tblHeader`), halaman diagram, Daftar Pustaka, dan Lampiran Surat Mitra. Baca citra langsung untuk memverifikasi nol tabel terpotong, nol teks menumpuk watermark, dan konsistensi spasi.
-3. **Review Kritis Pra-Kumpul**: Jalankan perspektif penguji menggunakan **`academic-paper-reviewer`** atau **`skripsi-auditor`** (jika relevan) terhadap rubrik 100 poin: Kelengkapan & Sistematika (20), Latar Belakang & Rumusan (25), Kajian & Kerangka (20), Metode & Indikator Uji (20), Tata Tulis, Sitasi & Similaritas (15).
+3. **Review Kritis Pra-Kumpul**: Periksa kelengkapan rubrik 100 poin: Kelengkapan & Sistematika (20), Latar Belakang & Rumusan (25), Kajian & Kerangka (20), Metode & Indikator Uji (20), Tata Tulis, Sitasi & Similaritas (15).
 4. **Pengemasan Bersih Penamaan Resmi**:
    - Berkas utama siap unggah (lengkap dengan lampiran): `UTS_<NIM>_<Nama_Lengkap>_<Skema>_<Kelas>.pdf` (sesuai ketentuan mata kuliah) plus sumber `.docx` & `.bib`.
    - Berkas opsional pratinjau Turnitin terpisah di subdirektori khusus tanpa lampiran mentah.
+
+### Fase 6: Mode Koreksi POV Dosen Penguji (*Adversarial Reviewer Pass*)
+Setelah naskah siap secara format, **putus peran penulis/mahasiswa** dan masuk penuh ke sudut pandang **Dosen Pembimbing/Penguji Skeptis** dengan memadukan `peer-review`, `scientific-critical-thinking`, `academic-paper-reviewer`, serta `skripsi-auditor`:
+
+1. **Audit Metodologi & Pitfall Teknis (*Traceable Critique*)**: Untuk setiap klaim metode/target, catat `Lokasi -> Temuan -> Konsekuensi -> Perbaikan Minimal`:
+   - *Model & Baseline*: Mengapa memilih metode X dibanding pembanding sederhana (*Naïve*, *SMA*, *SES*); pastikan optimasi parameter (`α, β`, *hyperparameter*) tidak membocorkan data uji (*data leakage*).
+   - *Matematika, Satuan & Edge Case*: Cek potensi pembagi nol (`Yt = 0` pada *MAPE*), konsistensi satuan (`kg`, `pack`, `hari` vs `jam` pada *lead time* / *Safety Stock*), serta kapasitas *usable* vs kapasitas kotor.
+   - *Konkurensi & Sinkronisasi Sistem*: Cek penanganan transaksi luring ganda (*idempotency key*), konflik data multi-pengguna, dan keberlanjutan biaya API/hosting pihak ketiga pada skema TTG yang diklaim gratis.
+2. **Audit Asal Data (*Data Provenance*)**: Pisahkan secara tegas mana angka hasil pengukuran aktual (ekspor POS/observasi bertanggal), mana rasio perkiraan sementara, dan mana target kalibrasi lanjutan.
+3. **Verifikasi Penguasaan Lisan Mahasiswa**: Susun 8–10 pertanyaan uji pemahaman seminar beserta matriks prioritas revisi (`Tinggi / Sedang`) untuk memastikan mahasiswa sanggup mempertanggungjawabkan naskah tanpa membaca teks.
 
 ---
 
@@ -110,5 +120,5 @@ Jalankan audit otomatis dan inspeksi visual sebelum menyerahkan berkas ke mahasi
 | Verifikasi metadata & sitasi berstandar riset | `nature-ref-verifier`, `nature-citation`, `grounded-citations` |
 | Penataan struktur argumen ilmiah & ko-authoring | `scientific-writing`, `doc-coauthoring`, `academic-paper` |
 | Eliminasi gaya bahasa robotik Indonesia | `humanizer-indonesia`, `no-ai-slop` |
-| Simulasi review penguji ketat sebelum sidang | `academic-paper-reviewer`, `skripsi-auditor` |
+| Koreksi metodologi, bias & POV Dosen Penguji | `peer-review`, `scientific-critical-thinking`, `academic-paper-reviewer`, `skripsi-auditor` |
 | Manipulasi/inspeksi DOCX/PDF umum | `docx`, `pdf` |

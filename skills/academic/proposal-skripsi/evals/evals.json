@@ -1,6 +1,6 @@
 {
   "skill_name": "proposal-skripsi",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "evals": [
     {
       "id": "ttg-end-to-end",
@@ -34,6 +34,18 @@
         "Menjalankan verify_bib_crossref_ojs.py untuk memastikan 100% referensi cocok 1:1 dan urutan [1..N] naik",
         "Menjalankan audit_proposal_style.py untuk memeriksa spasi 1.50, margin A4, nol leftover markdown, dan pola humanizer-indonesia",
         "Tidak mengubah data empiris atau mengarang angka/referensi saat memperbaiki temuan"
+      ]
+    },
+    {
+      "id": "dosen-pov-adversarial-review",
+      "prompt": "Masuk ke POV dosen penguji skripsi dan koreksi draf proposal saya secara objektif tanpa membela penulis. Periksa kejelasan parameter metode, risiko kebocoran data, asal data lapangan, dan siapkan pertanyaan seminar.",
+      "expected_output": "Laporan koreksi dosen terstruktur berisi orientasi klaim-bukti, celah metodologi/satuan/edge-case (dengan lokasi halaman/subbab), pemisahan angka aktual vs asumsi awal, matriks prioritas revisi (Tinggi/Sedang), dan daftar pertanyaan uji pemahaman seminar.",
+      "files": [],
+      "assertions": [
+        "Menggunakan perspektif korektor skeptis berbasis peer-review dan scientific-critical-thinking tanpa basa-basi pujian",
+        "Memisahkan sinyal gaya bahasa dari bukti ilmiah dan tidak mengarang skor persentase detektor AI",
+        "Menunjuk lokasi spesifik celah metode (baseline pembanding, pembagi nol, data leakage, satuan, idempotency, atau batas scope)",
+        "Menyediakan daftar pertanyaan penguji yang menuntut penguasaan konsep mahasiswa secara lisan"
       ]
     }
   ]
